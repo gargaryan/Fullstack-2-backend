@@ -1,0 +1,113 @@
+Practical-9
+
+
+Queries:
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Create Basic Login Authentication using POST Methods
+
+
+1. Create a home page with Links (Home, Page and SignIn)
+2. User click on Home Link, redirect to Home Page.
+3. About Link will redirect to About Page.
+4. User click on SignIn Link, redirect to Login Page.
+5. Validate the credentials, if valid redirect to Valid Page.
+6. if Invalid redirect to InValid Page.
+7. Also add 404 Page not Found, if invalid address hits using Error Handling Middleware
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solutions:
+
+import express from 'express';
+
+import bodyparser from 'body-parser';
+
+const app= express();
+
+port =process.env.port||3000;
+
+app.listen(port,()=>{
+
+    console.log(`server running at => localhost:${port}`);
+
+});
+
+
+
+
+app.get('/',(req,res)=>{
+
+    res.sendFile(__dirname + "/homepage.html");
+
+});
+
+app.get('/homepage.html',(req,res)=>{
+
+    res.sendFile(__dirname + "/homepage.html");
+
+    
+
+});
+
+app.get('/about.html',(req,res)=>{
+
+    res.sendFile(__dirname + '/about.html');
+
+});
+
+app.get('/login.html',(req,res)=>{
+
+    res.sendFile(__dirname + '/login.html');
+
+    
+
+});
+
+
+
+
+app.get('/valid.html',(req,res)=>{
+
+    res.sendFile(__dirname + '/valid.html');
+
+    
+
+});
+
+app.get('/invalid.html',(req,res)=>{
+
+    res.sendFile(__dirname + '/invalid.html');
+
+    
+
+});
+
+
+
+
+app.use(express.urlencoded({extended: true}));
+
+app.use(express.json());
+
+app.post('/login.html', (req, res) => {
+
+  console.log(req.body);
+
+if (req.body.uname == 'admin' && req.body.pwd == '123') {
+
+  
+
+    res.sendFile(__diename+'/valid.html');
+
+  } else {
+
+    res.sendFile(__diename+'/invalid.html');
+
+  }
+
+});
+
+
+
+
+
