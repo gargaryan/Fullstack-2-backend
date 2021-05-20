@@ -1,0 +1,210 @@
+Practical-7
+
+
+Queries:
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+React State Implementation
+
+Qus1.
+1. Create a UI with a counter
+2. Counter should have a previous value received from parent as props.
+3. There will be three buttons to Increment, Decrement and Reset to set to counter 0
+4. Refer to the video attached.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solutions:
+
+App.js
+________
+import Question2 from "./Component/Question2";
+import Reactstate from "./Component/Reactstate";
+
+function App() {
+  return (
+    <div className="App">
+      <Reactstate counter="0" />
+      <Question2 title="My Name is Aryan Garg .I am from Agra . I am harding engineering Student specialised in computeer science with overall CGPA of 8.54.I am  public relation Head at Aashayein Society. "/>
+    </div>
+  );
+}
+
+export default App;
+
+ARYAN GARGFeb 26
+ReactState.js
+it is ques1 class component
+
+
+
+import React, { Component } from 'react';
+
+import "./App.css"
+
+;
+
+export default class Reactstate extends Component {
+
+    constructor(props)
+
+    {
+
+        super(props);
+
+        this.state={
+
+            counter:this.props.counter,
+
+
+        };
+
+    }
+
+    update=()=>{this.setState({counter:parseInt(this.state.counter)+1})};
+
+    reset=()=>{
+
+        this.setState({counter:0})
+
+        console.log(this.state.counter);
+
+    }
+
+    decrease=()=>{this.setState({counter:parseInt(this.state.counter)-1})};
+
+    render() {
+
+        return (
+
+            <div id="Styling">
+
+                <h1 style={{color:"red"}}>Question1</h1>
+
+                <hr/>
+
+                <h1>{this.state.counter}</h1>
+
+                <button  id="btn"onClick={this.update} >Increase</button>
+
+                <button id="btn" onClick={this.reset}>Reset</button>
+
+                <button  id="btn"onClick={this.decrease}>Decrease</button>
+
+                
+
+            </div>
+
+        )
+
+    }
+
+}
+
+ARYAN GARGFeb 26
+Question2.js
+
+
+import React, { Component } from 'react';
+
+import "./App.css";
+
+
+
+export default class Question2 extends Component {
+
+    constructor(props)
+
+    {
+
+        super(props);
+
+        this.state={
+
+            content:"",
+
+            name:"Read More",
+
+            title:this.props.title,
+
+            
+
+        }
+
+        console.log('constructor called');
+
+        
+
+    }
+
+    
+
+    update=()=>{
+
+        if(this.state.name="Read More")
+
+        {
+
+            this.setState({name:"Read Less", content:this.state.title})
+
+        }
+
+        else
+
+        {
+
+            
+
+            this.setState({name:"Read More", content:""})
+
+        }
+
+    }
+
+    componentDidMount()
+
+    {
+
+        console.log("componentDidMount caled");
+
+    }
+
+   componentDidUpdate()
+
+   {
+
+       console.log('component update');
+
+   }
+
+
+    render()
+
+     {
+
+         console.log('render method called');
+
+        return (
+
+            <div id="Styling">
+
+                <h1 style={{color:"red"}}>Question2</h1>
+
+                <hr/>
+
+                <h3>Click on to see More | See Less</h3>
+
+                <p>{this.state.content}</p>
+
+                <button onClick={this.update}>{this.state.name}</button>
+
+            </div>
+
+        )
+
+    }
+
+  
+
+    
+
+}
+

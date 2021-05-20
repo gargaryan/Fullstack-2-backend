@@ -1,0 +1,106 @@
+Practical-6
+
+Queries:
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Create Functional and Class Components in your React Application
+
+1. Create a Functional Component and export to you App.js file.
+2. Create a Class Component and export to you App.js file.
+3. Import both functional and class component in App.js file.
+4. Use React.Fragment to remove extra div (Use both syntax of Fragment ).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Solutions:
+------------------------------------------------
+       Class Component
+------------------------------------------------
+import React from "react";
+import '../../src/App.css';
+
+class ClassComponent extends React.Component 
+{
+    render()
+    {
+        return (
+            <div id="class">
+                <h1>This is class Component</h1>
+                <p><span id="text">Created By:</span><span id="title"><b>Aryan Garg</b></span></p>
+            </div>
+        );
+    }
+
+}
+export default ClassComponent;
+
+
+import React from 'react'
+import '../../src/App.css';
+
+
+------------------------------------------------
+         Function Component
+------------------------------------------------
+function FunctionComponent ()
+{
+    return( 
+        <div id="function">
+            <h1>This is Function Component</h1>
+            <p><span id="text">Created By:</span><span id="title"><b>Aryan Garg</b></span></p>
+        </div>
+
+
+    );  
+}
+export default FunctionComponent;
+
+
+------------------------------------------------
+              APP.js
+------------------------------------------------
+import FunctionComponent from "./component/FunctionComponent";
+import ClassComponent from "./component/classComponent"
+import React from 'react';
+import './App.css';
+
+function App()
+{
+    return (
+        <React.Fragment>
+            <FunctionComponent/>
+            <ClassComponent/>
+        </React.Fragment>
+        );
+
+}
+export default App;
+
+------------------------------------------------
+              Applied CSS
+------------------------------------------------
+#function
+{
+    background-color: lightblue;
+    margin-top:20px;
+    width:35%;
+    padding:10px 20px;
+    margin:20px auto;
+    border-radius: 10px;
+}
+#class
+{
+    background-color: pink;
+    margin-top:20px;
+    width:35%;
+    padding:10px 20px;
+    margin:20px auto;
+    border-radius: 10px;
+}
+#text
+{
+  color:red;
+}
+#title
+{
+  background-color: yellow;
+}
