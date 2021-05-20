@@ -1,0 +1,48 @@
+Practical-5
+
+
+Queries:
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Create your First React Application
+
+1. Create a React app using Npm or Npx commands.
+2. Execute React app.
+3. Explain the Folder Structure of React App.
+4. Remove unnecessary files and print "Hello Word" in the output.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solutions:
+
+Activity-1
+npm v create-react-app
+
+npx create-react-app@next sandbox
+
+
+
+
+Activity-3
+Folder Structure 
+
+*Public Folder:it consists of 3 files.
+ 1.favicon.ico - it is an icon file which contains an icon which displays on the browser.
+2.index.html - it is an important file. Due to this file, the public folder, known as “root folder”, gets served by the web server in the end. Index.html is a single HTML page present in this project.
+3.manifest.json - this file contains a lot of information related to our application like short_name, name,icons, start_url, display etc. We can also define other metadata about our application.
+
+*src folder
+
+This folder contains actual source code for developers. This is the place where our React application is present. 
+We can create our own subdirectory inside this directory. For faster rebuilds, files inside only this folder are processed 
+by Webpack. However, this folder already contains the following files. 
+
+App.css - this file gives some CSS classes or we can say some styling which is used by App.js file.
+App.js - App.js is a sample React component called “App” which we get for free when creating a new app.
+App.test.js - this is the test file which basically allows us to create the unit tests for different units or we can say for different components.
+index.css - it stores the base styling for our application.
+index.js - index.js stores our main Render call from ReactDOM (more on that later). It imports our App.js component that we start with and tells React where to render it (remember that div with an id of root?).
+logo.svg - this is Scalable Vector Graphics file which contains the logo of Reactjs. By this file, we are able to see ReactJS logo on the browser.
+registerServiceWorker.js - as its name applies, it is important for registering a service which is generated automatically and creates Progressive Web Apps which are necessary for mobile React Native apps.
+
+*Package.json
+
+It is a standard file found in every project. It contains the information like the name of project, versions, dependencies etc. Whenever we install a third party library, it automatically gets registered into this file
