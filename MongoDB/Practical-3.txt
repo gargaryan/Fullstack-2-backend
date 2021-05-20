@@ -1,0 +1,44 @@
+Practical-3
+
+
+Queries:
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MongoDB CRUD Operations [ Update | Remove ]
+
+1. Update all names having "pankaj" to "Pankaj" using the update() method.
+2. Update the age of Pankaj Sharma from 24 to 30 using save()method.
+3. Add an address field with hno, city, pincode and state to all documents.
+4. Modify all the averageScore field to Score.
+5. Remove all the state field from the address field
+6. Remove the first student that belong to sec-D
+7. Remove all the students whose age is greater than 25.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+solutions:
+
+1. db.Students.update({name:"pankaj"},{$set:{name:"Pankaj"}},{multi:true})
+WriteResult({ "nMatched" : 2, "nUpserted" : 0, "nModified" : 2 })
+
+2.db.Students.save({_id:ObjectId("60115e5dd5165e1e9848f5d8"),name:"Pankaj",lastName:"Sharma",age:30,averageScore:3.4,id:19,sec:"D",gender:"male"})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("60115e5dd5165e1e9848f5d8")
+})
+
+3. db.Students.updateMany({},{$set:{"address":{hno:null,city:null,pincode:null,state:null}}})
+{ "acknowledged" : true, "matchedCount" : 21, "modifiedCount" : 21 }
+
+4.db.Students.updateMany({},{$rename:{"averageScore":"Score"}})
+{ "acknowledged" : true, "matchedCount" : 21, "modifiedCount" : 21 }
+
+5.db.Students.updateMany({},{$unset:{"address.state":null}})
+{ "acknowledged" : true, "matchedCount" : 21, "modifiedCount" : 21 }
+
+6.db.Students.remove({sec:"D"},1)
+WriteResult({ "nRemoved" : 1 })
+
+7.db.Students.remove({age:{$gt:25}})
+WriteResult({ "nRemoved" : 3 })
+>

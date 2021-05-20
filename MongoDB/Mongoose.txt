@@ -1,0 +1,188 @@
+Practical-5
+
+Queries:
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Create an Application to perform CRUD Operations using Mongoose
+
+1. Create a Blogger's Database having schema with different Data Structures available.
+2. Create a Model with Post collection to perform all CRUD Operations.
+3. Insert multiple posts and read all.
+4. Read, Update and Delete a record using Mongoose model.
+5. Adding validation to the data structure and validate it.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solutions:
+const mongoose=require('mongoose');
+
+//connect to database
+
+mongoose.connect('mongodb://localhost:27017/Blogger',{
+
+    useNewUrlParser:true,
+
+useUnifiedTopology:true,
+
+useFindAndModify:false,
+
+})
+
+.then(()=>console.log('connection successful'))
+
+.catch(()=>console.log('nhi hua connection'));
+
+//creating the student schema
+
+//Activity-1
+
+const studentSchema=new mongoose.Schema({
+
+   Author:
+
+   {
+
+       type:String,
+
+        required:true
+
+    },
+
+   BlogCategory:String,
+
+   num_blogs:Number,
+
+   publish_date:
+
+   {type:Date,
+
+    default:Date.now
+
+   },
+
+   publised:Boolean,
+
+
+});
+
+const Post_collection=new mongoose.model("Post_collection",studentSchema);
+
+//Activity-2
+
+const stu1=new Post_collection({
+
+    Author:"Aryan",
+
+    BlogCategory:"food",
+
+    num_blogs:1,
+
+    publised:true,
+
+    publish_date:"2021-11-21"
+
+});
+
+stu1.save()
+
+.then(()=>console.log('inserted'))
+
+.catch((err)=> console.log('nhi hua',err));
+
+//Activity-3
+
+const stu2=new Post_collection({
+
+    Author:"Priyanshu",
+
+    BlogCategory:"hukka",
+
+    num_blogs:2,
+
+    publised:true,
+
+    
+
+});
+
+const stu3=new Post_collection(
+
+{
+
+    Author:"Ritik",
+
+    BlogCategory:"satta",
+
+    num_blogs:3,
+
+    publised:true,
+
+});
+
+const stu4=new Post_collection(
+
+    {
+
+        Author:"Nikhil",
+
+        BlogCategory:"chawmean",
+
+        num_blogs:4,
+
+        publised:true,
+
+        publish_date:"2020-12-9",
+
+    
+
+});
+
+Post_collection.insertMany([stu2,stu3,stu4])
+
+.then((doc)=>console.log(doc))
+
+.catch((error)=>console.log(error));
+
+//Activity-4
+
+//Read
+
+const docs=Post_collection.find({"Author":"Nikhil"})
+
+.then((doc)=>console.log(doc))
+
+.catch(()=>console.log(error));
+
+//update
+
+const doc1=Post_collection.findOneAndUpdate({Author:'Priyanshu'},{Author:"vinay"})
+
+then(()=>console.log('update done'))
+
+.catch(()=>console.log('abhi update nhi hua'));
+
+//delete
+
+const doc2=Post_collection.deleteOne({_id:"6024f6adb8c89733547a1237"})
+
+.then(()=>console.log('delete done'))
+
+.catch(()=>console.log('abhi delete nhi nhi hua'));
+
+
+//Activty-5
+
+stu5=new Post_collection({
+
+    BlogCategory:"chawmean",
+
+        num_blogs:4,
+
+        publised:true,
+
+
+})
+
+stu5.save()
+
+.then(()=>console.log('ho gya save'))
+
+.catch((error)=>console.log(error));//name validate error come

@@ -1,0 +1,106 @@
+Practical-4
+
+Queries:
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Perform MongoDB [Aggregate | Indexes | Utilities ] Operations.
+
+1. Display the Names of the Students who play Cricket
+2. Find the Average Marks obtained by each Sec and Arrange in Descending Order
+3. Find the count of female student in each Sec and Display 2nd and 3rd Documents only.
+4. Create an index on id that identified students uniquely and check their performance using explain()
+method and also delete this index after use.
+5. Take the backup of this Student collection and restore after drooping it.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solutions:
+Activity:1
+>db.student1.aggregate([ {$unwind: "$sports"}, {$match : {sports : "cricket"}}, {$group : {_id: "$sports", names: {$push: "$name"}}} ]);
+{ "_id" : "cricket", "names" : [ "priya", "kamal", "sachin", "manish", "sachin", "pankaj", "manish", "sneha", "sonali", "varsh", "Tanya", "pankaj" ] }
+
+Activity:2
+>db.student1.aggregate([
+ {$group: {_id:"$sec", avgMarks:
+ {$avg:"$averageScore"}}},
+ {$sort: {"avgMarks" :-1}}
+... ])
+{ "_id" : "A", "avgMarks" : 7 }
+{ "_id" : "C", "avgMarks" : 5.8 }
+{ "_id" : "D", "avgMarks" : 4.9 }
+{ "_id" : "B", "avgMarks" : 4.566666666666666 }
+
+Activity:3
+>db.student1.aggregate([
+{$match: {gender:"female"}},
+{$group: {_id:"$sec", count:{$sum:1}}},
+{$limit:3},{$skip:1}
+])
+{ "_id" : "B", "count" : 1 }
+{ "_id" : "C", "count" : 3 }
+
+Activity:4
+>db.student1.createIndex({id:1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+
+>db.student1.explain().find({id:3})
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "CRUD.student1",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "id" : {
+                                "$eq" : 3
+                        }
+                },
+                "queryHash" : "6DAB46EC",
+                "planCacheKey" : "801B9D84",
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "id" : 1
+                                },
+                                "indexName" : "id_1",
+                                "isMultiKey" : false,
+                                "multiKeyPaths" : {
+                                        "id" : [ ]
+                                },
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 2,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "id" : [
+                                                "[3.0, 3.0]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "DESKTOP-KN7DUEO",
+                "port" : 27017,
+                "version" : "4.4.3",
+                "gitVersion" : "913d6b62acfbb344dde1b116f4161360acd8fd13"
+        },
+        "ok" : 1
+}
+
+> db.student1.dropIndex({id:1})
+{ "nIndexesWas" : 2, "ok" : 1 }
+
+Activity:5
+>mongodump --db CRUD --collection student1 --out backup
+
+>db.student1.drop()
+
+>mongorestore --db CRUD --collection student1 backup\CRUD\student1.bson
+

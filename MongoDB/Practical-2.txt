@@ -1,0 +1,462 @@
+Practical-2
+
+Queries:
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MongoDB CRUD Operations and MongoDB Compass [ Create | Read ]
+
+1. Create a database social_platform using GUI Environment.
+2. Create collection with account that can store the data of social platform with following fields:
+userId as Number,
+username as array [git, linkedin, fb],
+password,
+email_id,
+followers,
+status(active|Inactive)
+3. Insert records of your 10 users using insert(), insertOne() and InsertMany() functions on console.
+4. Print the Document of 4th user
+5. Format the Documents using forEach()
+6. Print the Name of users who are having followers more than 50.
+7. Print the name, email, Followers of users[ 6-10 ]
+8. Print the name of the users whose status is inactive and whose password is not mentioned or whose followers are
+less than 10.
+9. Create a new collection social_platform1 with same no. of users using MongoDB Compass GUI.
+10. Add new field in the document using GUI.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solutions:
+Activity 1: Screensort already given.
+
+
+
+
+Activity 2:
+
+{
+
+  "userid":1,
+
+  "username":["itsritik","goyal@linkedin","RitikGoyal"],
+
+  "password":"rocket21",
+
+  "email_id":"ritik.goyal_cs18@gla.ac.in",
+
+  "followers":100,
+
+  "status":"active" 
+
+  
+
+}
+
+
+
+
+Activity 3:
+
+ db.social_platform_account.insert({userid:2,username:["gargaryan","gargsahb@linkedin","Aryangarg"],password:"garg21",email_id:"aryan.garg_cs18@gla.ac.in",followers:150,status:"active"})
+
+db.social_platform_account.insert({userid:3,username:["priyanhsu shukla","prisahb@linkedin","priyanshu"],password:"priyanshu21",email_id:"priyashu.shukla_cs18@gla.ac.in",followers:135,status:"inactive"})
+
+ db.social_platform_account.insertone({userid:4,username:["nikhil","nik@linkedin","nik"],password:"nik21",email_id:"nik.shukla_cs18@gla.ac.in",followers:135,status:"inactive"})
+
+ db.social_platform_account.insertOne({userid:5,username:["manyaagarwal","manya@linkedin","manya"],password:"manya01",email_id:"manya.shukla_cs18@gla.ac.in",followers:235,status:"inactive"})
+
+ db.social_platform_account.insertOne({userid:6,username:["nikhil","nik@linkedin","nik"],password:"nik21",email_id:"nik.shukla_cs18@gla.ac.in",followers:135,status:"inactive"})
+
+db.social_platform_account.insertOne({userid:7,username:["gargiagarwal","gargi@linkedin","gargi"],password:"gargi01",email_id:"gargi_cs18@gla.ac.in",followers:231,status:"active"})
+
+var arr=[{userid:9,username:["shrutiagarwal","shruti@linkedin","shruti"],password:"shruti01",email_id:"shruti.shukla_cs18@gla.ac.in",followers:289,status:"active"},{userid:10,username:["kushaagarwal","kush@linkedin","kush"],password:"kush01",email_id:"kush_cs18@gla.ac.in",followers:250,status:"active"},{userid:11,username:["manojaagarwal","manoj@linkedin","manoj"],password:"manoj01",email_id:"manoj_cs18@gla.ac.in",followers:451,status:"inactive"}]
+
+db.social_platform_account.insertMany(arr)
+
+db.social_platform_account.insertOne({userid:8,username:["amayraagarwal","amayra@linkedin","amayra"],password:"amayra01",email_id:"amayra_cs18@gla.ac.in",followers:252,status:"inactive"})
+
+ 
+
+Activity 4:
+
+ db.social_platform_account.find({userid:4}).pretty()
+
+{
+
+        "_id" : ObjectId("600c633d5e42fefc5f40ad72"),
+
+        "userid" : 4,
+
+        "username" : [
+
+                "nikhil",
+
+                "nik@linkedin",
+
+                "nik"
+
+        ],
+
+        "password" : "nik21",
+
+        "email_id" : "nik.shukla_cs18@gla.ac.in",
+
+        "followers" : 135,
+
+        "status" : "inactive"
+
+}
+
+Activity 5:
+
+db.social_platform_account.find().forEach(printjson)
+
+{
+
+        "_id" : ObjectId("600c621e5e42fefc5f40ad70"),
+
+        "userid" : 2,
+
+        "username" : [
+
+                "gargaryan",
+
+                "gargsahb@linkedin",
+
+                "Aryangarg"
+
+        ],
+
+        "password" : "garg21",
+
+        "email_id" : "aryan.garg_cs18@gla.ac.in",
+
+        "followers" : 150,
+
+        "status" : "active"
+
+}
+
+{
+
+        "_id" : ObjectId("600c62b85e42fefc5f40ad71"),
+
+        "userid" : 3,
+
+        "username" : [
+
+                "priyanhsu shukla",
+
+                "prisahb@linkedin",
+
+                "priyanshu"
+
+        ],
+
+        "password" : "priyanshu21",
+
+        "email_id" : "priyashu.shukla_cs18@gla.ac.in",
+
+        "followers" : 135,
+
+        "status" : "inactive"
+
+}
+
+{
+
+        "_id" : ObjectId("600c633d5e42fefc5f40ad72"),
+
+        "userid" : 4,
+
+        "username" : [
+
+                "nikhil",
+
+                "nik@linkedin",
+
+                "nik"
+
+        ],
+
+        "password" : "nik21",
+
+        "email_id" : "nik.shukla_cs18@gla.ac.in",
+
+        "followers" : 135,
+
+        "status" : "inactive"
+
+}
+
+{
+
+        "_id" : ObjectId("600c638d5e42fefc5f40ad73"),
+
+        "userid" : 5,
+
+        "username" : [
+
+                "manyaagarwal",
+
+                "manya@linkedin",
+
+                "manya"
+
+        ],
+
+        "password" : "manya01",
+
+        "email_id" : "manya.shukla_cs18@gla.ac.in",
+
+        "followers" : 235,
+
+        "status" : "inactive"
+
+}
+
+{
+
+        "_id" : ObjectId("600c65e65e42fefc5f40ad74"),
+
+        "userid" : 6,
+
+        "username" : [
+
+                "nikhil",
+
+                "nik@linkedin",
+
+                "nik"
+
+        ],
+
+        "password" : "nik21",
+
+        "email_id" : "nik.shukla_cs18@gla.ac.in",
+
+        "followers" : 135,
+
+        "status" : "inactive"
+
+}
+
+{
+
+        "_id" : ObjectId("600c66135e42fefc5f40ad75"),
+
+        "userid" : 7,
+
+        "username" : [
+
+                "gargiagarwal",
+
+                "gargi@linkedin",
+
+                "gargi"
+
+        ],
+
+        "password" : "gargi01",
+
+        "email_id" : "gargi_cs18@gla.ac.in",
+
+        "followers" : 231,
+
+        "status" : "active"
+
+}
+
+{
+
+        "_id" : ObjectId("600c66445e42fefc5f40ad76"),
+
+        "userid" : 8,
+
+        "username" : [
+
+                "amayraagarwal",
+
+                "amayra@linkedin",
+
+                "amayra"
+
+        ],
+
+        "password" : "amayra01",
+
+        "email_id" : "amayra_cs18@gla.ac.in",
+
+        "followers" : 252,
+
+        "status" : "inactive"
+
+}
+
+{
+
+        "_id" : ObjectId("600c66d25e42fefc5f40ad77"),
+
+        "userid" : 9,
+
+        "username" : [
+
+                "shrutiagarwal",
+
+                "shruti@linkedin",
+
+                "shruti"
+
+        ],
+
+        "password" : "shruti01",
+
+        "email_id" : "shruti.shukla_cs18@gla.ac.in",
+
+        "followers" : 289,
+
+        "status" : "active"
+
+}
+
+{
+
+        "_id" : ObjectId("600c66d25e42fefc5f40ad78"),
+
+        "userid" : 10,
+
+        "username" : [
+
+                "kushaagarwal",
+
+                "kush@linkedin",
+
+                "kush"
+
+        ],
+
+        "password" : "kush01",
+
+        "email_id" : "kush_cs18@gla.ac.in",
+
+        "followers" : 250,
+
+        "status" : "active"
+
+}
+
+{
+
+        "_id" : ObjectId("600c66d25e42fefc5f40ad79"),
+
+        "userid" : 11,
+
+        "username" : [
+
+                "manojaagarwal",
+
+                "manoj@linkedin",
+
+                "manoj"
+
+        ],
+
+        "password" : "manoj01",
+
+        "email_id" : "manoj_cs18@gla.ac.in",
+
+        "followers" : 451,
+
+        "status" : "inactive"
+
+}
+
+{
+
+        "_id" : ObjectId("600c682fa45a482ecc54940d"),
+
+        "userid" : 1,
+
+        "username" : [
+
+                "itsritik",
+
+                "goyal@linkedin",
+
+                "RitikGoyal"
+
+        ],
+
+        "password" : "rocket21",
+
+        "email_id" : "ritik.goyal_cs18@gla.ac.in",
+
+        "followers" : 100,
+
+        "status" : "active"
+
+}
+
+Activity 6:
+
+db.social_platform_account.find({followers:{$gt:50}},{username:1})
+
+{ "_id" : ObjectId("600c621e5e42fefc5f40ad70"), "username" : [ "gargaryan", "gargsahb@linkedin", "Aryangarg" ] }
+
+{ "_id" : ObjectId("600c62b85e42fefc5f40ad71"), "username" : [ "priyanhsu shukla", "prisahb@linkedin", "priyanshu" ] }
+
+{ "_id" : ObjectId("600c633d5e42fefc5f40ad72"), "username" : [ "nikhil", "nik@linkedin", "nik" ] }
+
+{ "_id" : ObjectId("600c638d5e42fefc5f40ad73"), "username" : [ "manyaagarwal", "manya@linkedin", "manya" ] }
+
+{ "_id" : ObjectId("600c65e65e42fefc5f40ad74"), "username" : [ "nikhil", "nik@linkedin", "nik" ] }
+
+{ "_id" : ObjectId("600c66135e42fefc5f40ad75"), "username" : [ "gargiagarwal", "gargi@linkedin", "gargi" ] }
+
+{ "_id" : ObjectId("600c66445e42fefc5f40ad76"), "username" : [ "amayraagarwal", "amayra@linkedin", "amayra" ] }
+
+{ "_id" : ObjectId("600c66d25e42fefc5f40ad77"), "username" : [ "shrutiagarwal", "shruti@linkedin", "shruti" ] }
+
+{ "_id" : ObjectId("600c66d25e42fefc5f40ad78"), "username" : [ "kushaagarwal", "kush@linkedin", "kush" ] }
+
+{ "_id" : ObjectId("600c66d25e42fefc5f40ad79"), "username" : [ "manojaagarwal", "manoj@linkedin", "manoj" ] }
+
+{ "_id" : ObjectId("600c682fa45a482ecc54940d"), "username" : [ "itsritik", "goyal@linkedin", "RitikGoyal" ] }
+
+
+
+
+Activity 7 :
+
+db.social_platform_account.find({userid:{$in: [6,7,8,9,10]}},{username:1,followers:1,email_id:1})
+
+{ "_id" : ObjectId("600c65e65e42fefc5f40ad74"), "username" : [ "nikhil", "nik@linkedin", "nik" ], "email_id" : "nik.shukla_cs18@gla.ac.in", "followers" : 135 }
+
+{ "_id" : ObjectId("600c66135e42fefc5f40ad75"), "username" : [ "gargiagarwal", "gargi@linkedin", "gargi" ], "email_id" : "gargi_cs18@gla.ac.in", "followers" : 231 }
+
+{ "_id" : ObjectId("600c66445e42fefc5f40ad76"), "username" : [ "amayraagarwal", "amayra@linkedin", "amayra" ], "email_id" : "amayra_cs18@gla.ac.in", "followers" : 252 }
+
+{ "_id" : ObjectId("600c66d25e42fefc5f40ad77"), "username" : [ "shrutiagarwal", "shruti@linkedin", "shruti" ], "email_id" : "shruti.shukla_cs18@gla.ac.in", "followers" : 289 }
+
+{ "_id" : ObjectId("600c66d25e42fefc5f40ad78"), "username" : [ "kushaagarwal", "kush@linkedin", "kush" ], "email_id" : "kush_cs18@gla.ac.in", "followers" : 250 }
+
+
+
+
+Activity 8 :
+
+ db.social_platform_account.find({$or:[{status:"inactive"},{password:""},{followers:{$lt:10}}]},{username:1})
+
+{ "_id" : ObjectId("600c62b85e42fefc5f40ad71"), "username" : [ "priyanhsu shukla", "prisahb@linkedin", "priyanshu" ] }
+
+{ "_id" : ObjectId("600c633d5e42fefc5f40ad72"), "username" : [ "nikhil", "nik@linkedin", "nik" ] }
+
+{ "_id" : ObjectId("600c638d5e42fefc5f40ad73"), "username" : [ "manyaagarwal", "manya@linkedin", "manya" ] }
+
+{ "_id" : ObjectId("600c65e65e42fefc5f40ad74"), "username" : [ "nikhil", "nik@linkedin", "nik" ] }
+
+{ "_id" : ObjectId("600c66445e42fefc5f40ad76"), "username" : [ "amayraagarwal", "amayra@linkedin", "amayra" ] }
+
+{ "_id" : ObjectId("600c66d25e42fefc5f40ad79"), "username" : [ "manojaagarwal", "manoj@linkedin", "manoj" ] }
+
+ 
+
+Activity 9 & 10: screenshort present
